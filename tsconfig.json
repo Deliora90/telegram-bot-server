@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es2017",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@helpers/*": [
+        "src/helpers/*"
+      ],
+      "@routes/*": [
+        "src/routes/*"
+      ],
+      "@constants": [
+        "src/constants.ts"
+      ],
+      "@configs": [
+        "src/configs.ts"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+}
