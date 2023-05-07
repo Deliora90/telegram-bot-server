@@ -1,6 +1,6 @@
 import { Topics } from "@constants";
 import { UserParams, IUser } from "./user.types";
-import User from "@models/User";
+import User from "./user.model";
 
 class UserController implements IUser {
   async create(params: UserParams) {

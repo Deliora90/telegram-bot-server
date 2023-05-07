@@ -3,7 +3,7 @@ import TelegramApi from "node-telegram-bot-api";
 import { getAIAnswer } from "@api/openai";
 import { speechToText } from "@helpers/speechToText";
 import { commands } from "@constants";
-import userController from "@controllers/user/user.controller";
+import userController from "@models/user/user.controller";
 
 export const startBot = (bot: TelegramApi, openai: OpenAIApi) => {
   bot.setMyCommands(commands);
