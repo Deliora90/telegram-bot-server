@@ -1,23 +1,29 @@
 {
   "name": "telegram-bot-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "tsc",
     "start": "node src/index.ts",
     "dev": "nodemon src/index.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "telegram",
+    "telegram-bot",
+    "AI"
+  ],
+  "author": "Sakharova Maria",
   "license": "ISC",
-  "description": "",
+  "description": "Telegram bot for practicing English",
   "_moduleAliases": {
     "@helpers": "src/helpers/",
     "@routes": "src/routes/",
+    "@controllers": "src/controllers/",
     "@constants": "src/constants.ts",
     "@configs": "src/configs.ts",
     "@api": "src/api/",
-    "@types": "src/types/"
+    "@types": "src/types/",
+    "@models": "src/models/"
   },
   "_moduleDirectories": [
     "node_modules_custom"

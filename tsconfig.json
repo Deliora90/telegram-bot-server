@@ -26,6 +26,12 @@
       ],
       "@types/*": [
         "src/types/*"
+      ],
+      "@controllers/*": [
+        "src/controllers/*"
+      ],
+      "@models/*": [
+        "src/models/*"
       ]
     }
   },

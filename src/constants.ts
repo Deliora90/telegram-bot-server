@@ -30,3 +30,5 @@ export const gptResponse: CreateChatCompletionResponse = {
     total_tokens: 21,
   },
 };
+
+export type Topics = "series";

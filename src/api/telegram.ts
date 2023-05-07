@@ -3,11 +3,13 @@ import TelegramApi from "node-telegram-bot-api";
 import { getAIAnswer } from "@api/openai";
 import { speechToText } from "@helpers/speechToText";
 import { commands } from "@constants";
+import userController from "@controllers/user/user.controller";
 
 export const startBot = (bot: TelegramApi, openai: OpenAIApi) => {
   bot.setMyCommands(commands);
 
   bot.addListener("voice", async (message) => {
+    console.log({ message });
     const chatId = message.chat.id;
     const fileID = message.voice.file_id;
     try {
@@ -22,9 +24,13 @@ export const startBot = (bot: TelegramApi, openai: OpenAIApi) => {
   });
 
   bot.addListener("message", async (message) => {
-    const text = message.text;
-    const chatId = message.chat.id;
+    const { chat, text } = message;
+    const chatId = chat.id;
     if (text === "/start") {
+      await userController.create({
+        telegramId: chatId,
+        username: chat.username,
+      });
       // await bot.sendMessage();
       return;
     }

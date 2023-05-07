@@ -17,14 +17,17 @@ app.use(express.json());
 const start = async () => {
   const bot = new TelegramApi(process.env.TELEGRAM_API_TOKEN, telegramconfig);
   const openai = new OpenAIApi(openaiconfig);
+  try {
+    await mongoose.connect(process.env.DB);
 
-  await mongoose.connect(process.env.DB);
+    app.listen(process.env.PORT, function () {
+      console.log("Server started on port " + process.env.PORT);
+    });
 
-  app.listen(process.env.PORT, function () {
-    console.log("Server started on port " + process.env.PORT);
-  });
-
-  startBot(bot, openai);
+    startBot(bot, openai);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 start();
