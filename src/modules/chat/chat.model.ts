@@ -2,7 +2,7 @@ import { Schema, model, Types } from "mongoose";
 
 const ChatSchema = new Schema({
   index: Number,
-  message: [{ type: Types.ObjectId, ref: "Message" }],
+  messages: [{ type: Types.ObjectId, ref: "Message" }],
   finishReason: String,
 });
 

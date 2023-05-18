@@ -3,7 +3,7 @@ import TelegramApi from "node-telegram-bot-api";
 import { getAIAnswer } from "@api/openai";
 import { speechToText } from "@helpers/speechToText";
 import { commands } from "@constants";
-import userController from "@models/user/user.controller";
+import { EasyBotController } from "./easyBot.controller";
 
 export const startBot = (bot: TelegramApi, openai: OpenAIApi) => {
   bot.setMyCommands(commands);
@@ -26,15 +26,11 @@ export const startBot = (bot: TelegramApi, openai: OpenAIApi) => {
   bot.addListener("message", async (message) => {
     const { chat, text } = message;
     const chatId = chat.id;
-    if (text === "/start") {
-      await userController.create({
-        telegramId: chatId,
-        username: chat.username,
-      });
-      // await bot.sendMessage();
-      return;
-    }
-    if (text === "/info") {
+    switch (text) {
+      case "/start":
+        return await EasyBotController.start(chatId, chat.username);
+      case "/topics":
+        return EasyBotController.topics(bot, chatId);
     }
   });
 };

@@ -5,7 +5,7 @@ import { config } from "dotenv";
 import TelegramApi from "node-telegram-bot-api";
 import express from "express";
 import mongoose from "mongoose";
-import { startBot } from "@api/telegram";
+import { startBot } from "@api/telegram/telegram";
 import { openaiconfig, telegramconfig } from "@configs";
 
 const app = express();

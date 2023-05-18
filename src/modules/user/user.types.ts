@@ -1,17 +1,16 @@
 import { Topics } from "@constants";
+import { RequestError } from "@models/content.types";
+import { IUserDocument } from "./user.model";
 
 export type UserParams = {
   telegramId: number;
   username?: string;
 };
 
-export type RequestError = {
-  message: string;
-};
+export type Result<T> = T | RequestError;
 
-export type Result = boolean | RequestError;
-
-export interface IUser {
-  create: (params: UserParams) => Promise<Result>;
-  chooseTopic: (topic: Topics) => Promise<Result>;
+export interface IUserController {
+  create: (params: UserParams) => Promise<Result<boolean>>;
+  chooseTopic: (topic: Topics) => Promise<Result<boolean>>;
+  findUser: (telegramId: number) => Promise<Result<IUserDocument | undefined>>;
 }

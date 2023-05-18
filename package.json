@@ -19,11 +19,11 @@
     "@helpers": "src/helpers/",
     "@routes": "src/routes/",
     "@controllers": "src/controllers/",
-    "@constants": "src/constants.ts",
-    "@configs": "src/configs.ts",
     "@api": "src/api/",
-    "@types": "src/types/",
-    "@models": "src/models/"
+    "@models": "src/models/",
+    "@modules": "src/modules/",
+    "@constants": "src/constants.ts",
+    "@configs": "src/configs.ts"
   },
   "_moduleDirectories": [
     "node_modules_custom"
