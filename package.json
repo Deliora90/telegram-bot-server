@@ -16,12 +16,11 @@
   "license": "ISC",
   "description": "Telegram bot for practicing English",
   "_moduleAliases": {
-    "@helpers": "src/helpers/",
-    "@routes": "src/routes/",
-    "@controllers": "src/controllers/",
     "@api": "src/api/",
+    "@helpers": "src/helpers/",
     "@models": "src/models/",
-    "@modules": "src/modules/",
+    "@services": "src/services/",
+    "@generalTypes": "src/generalTypes/",
     "@constants": "src/constants.ts",
     "@configs": "src/configs.ts"
   },
@@ -29,6 +28,7 @@
     "node_modules_custom"
   ],
   "dependencies": {
+    "@dqbd/tiktoken": "^1.0.7",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@types/express": "^4.17.17",
     "@types/node": "^18.15.11",

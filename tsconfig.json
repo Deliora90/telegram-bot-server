@@ -9,29 +9,26 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
+      "@api/*": [
+        "src/api/*"
+      ],
       "@helpers/*": [
         "src/helpers/*"
       ],
-      "@routes/*": [
-        "src/routes/*"
+      "@models/*": [
+        "src/models/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@generalTypes/*": [
+        "src/generalTypes/*"
       ],
       "@constants": [
         "src/constants.ts"
       ],
       "@configs": [
         "src/configs.ts"
-      ],
-      "@api/*": [
-        "src/api/*"
-      ],
-      "@models/*": [
-        "src/models/*"
-      ],
-      "@controllers/*": [
-        "src/controllers/*"
-      ],
-      "@modules/*": [
-        "src/modules/*"
       ],
     }
   },
