@@ -1,4 +1,4 @@
-import { RequestError } from "@generalTypes/content";
+import { RequestError } from "@globalTypes/content";
 
 export const isRequestError = (error: unknown): error is RequestError =>
   !!error &&

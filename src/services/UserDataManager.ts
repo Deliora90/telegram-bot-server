@@ -1,6 +1,6 @@
 import { TopicsType } from "@constants";
-import { Message } from "@generalTypes/content";
-import { UserParams } from "@generalTypes/user";
+import { Message } from "@globalTypes/content";
+import { UserParams } from "@globalTypes/user";
 import User from "@models/user";
 
 export class UserDataManager {

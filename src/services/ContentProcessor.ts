@@ -15,8 +15,8 @@ export class ContentProcessor {
   async sendMessage(message: string) {
     try {
       return await this.sendMessageToAI(message);
-    } catch (err) {
-      console.error("ContentProcessor.sendMessage", { err });
+    } catch (error) {
+      console.error("ContentProcessor.sendMessage", { error });
     }
   }
 

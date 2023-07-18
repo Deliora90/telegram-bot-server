@@ -7,6 +7,6 @@ export const deleteFiles = (paths: string[]) => {
 };
 
 export const deleteFile = (path: string) =>
-  fs.unlink(path, (err) => {
-    if (err) throw err;
+  fs.unlink(path, (error) => {
+    if (error) throw error;
   });

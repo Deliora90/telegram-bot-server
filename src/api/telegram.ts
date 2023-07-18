@@ -1,9 +1,15 @@
 import TelegramApi from "node-telegram-bot-api";
-import { commands, topicOptions } from "@constants";
+import {
+  TOPIC_MESSAGE,
+  commands,
+  topicOptions,
+  usersActions,
+  removeKeyboard,
+} from "@constants";
 import { telegramconfig } from "@configs";
 import { MessageProcessor } from "@services/MessageProcessor";
 import { VoiceProcessor } from "@services/VoiceProcessor";
-import { TextToSpeechProcessor } from "./TTSMarker";
+import { deleteFile } from "@helpers/deleteFiles";
 
 export const startBot = () => {
   const bot = new TelegramApi(process.env.TELEGRAM_API_TOKEN, telegramconfig);
@@ -16,12 +22,13 @@ export const startBot = () => {
     try {
       const href = await bot.getFileLink(fileID);
       const voiceProcessor = new VoiceProcessor(chatId, username);
+      await bot.sendChatAction(chatId, "record_voice");
       const answer = await voiceProcessor.sendVoice(href);
-      const textToSpeech = new TextToSpeechProcessor(answer.content);
-      return bot.sendVoice(chatId, await textToSpeech.getVoice());
-      // return bot.sendMessage(chatId, answer.content);
-    } catch (err) {
-      console.error("bot.voice", { err });
+      const voice = await voiceProcessor.getVoice(answer.content);
+      await bot.sendVoice(chatId, voice, usersActions);
+      deleteFile(voice.path as string);
+    } catch (error) {
+      console.error("bot.voice", { error });
     }
   });
 
@@ -30,27 +37,42 @@ export const startBot = () => {
     const { id: chatId, username } = message.chat;
     const messageProcessor = new MessageProcessor(chatId, username);
     if (!text) return;
-    switch (text) {
-      case "/start":
-        await messageProcessor.start();
-        return bot.sendMessage(chatId, "Hello!");
-      case "/topics":
-        return bot.sendMessage(chatId, "choose topics", topicOptions);
-      case "/voice":
-        const textToSpeech = new TextToSpeechProcessor("speak");
-        return bot.sendVoice(chatId, await textToSpeech.getVoice());
-      default: {
-        const answer = await messageProcessor.sendMessage(text);
-        return bot.sendMessage(chatId, answer.content);
+    try {
+      switch (text) {
+        case "/start":
+          await messageProcessor.start();
+          return bot.sendMessage(chatId, "Hello!", removeKeyboard);
+        case "/topics":
+          return bot.sendMessage(chatId, "choose topics", topicOptions);
+        case "Text the same in English":
+          const message = await messageProcessor.getTextOfVoice();
+          return bot.sendMessage(chatId, message.content, removeKeyboard);
+        default: {
+          await bot.sendChatAction(chatId, "typing");
+          const answer = await messageProcessor.sendMessage(text);
+          return bot.sendMessage(chatId, answer.content, removeKeyboard);
+        }
       }
+    } catch (error) {
+      console.error("bot.message", { error });
     }
   });
 
   bot.on("callback_query", async (query) => {
-    const { message, data: chosenTopic } = query;
-    const { id: chatId, username } = message.chat;
-    const messageProcessor = new MessageProcessor(chatId, username);
-    await messageProcessor.updateTopic(chosenTopic);
-    return bot.sendMessage(chatId, "Hello!");
+    try {
+      const { message, data: chosenTopic } = query;
+      const { id: chatId, username } = message.chat;
+      const voiceProcessor = new VoiceProcessor(chatId, username);
+      const messageProcessor = new MessageProcessor(chatId, username);
+      await messageProcessor.updateTopic(chosenTopic);
+      const answer = await messageProcessor.sendMessage(
+        `${TOPIC_MESSAGE} ${chosenTopic}`
+      );
+      const voice = await voiceProcessor.getVoice(answer.content);
+      await bot.sendVoice(chatId, voice, usersActions);
+      deleteFile(voice.path as string);
+    } catch (error) {
+      console.error("bot.callback_query", { error });
+    }
   });
 };

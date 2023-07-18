@@ -24,7 +24,7 @@ export const downloadsFile = (url: string, outputDir: string) =>
           });
         });
       })
-      .catch((err) => {
-        reject(err);
+      .catch((error) => {
+        reject(error);
       });
   });

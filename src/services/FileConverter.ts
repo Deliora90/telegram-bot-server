@@ -14,8 +14,8 @@ export class FileConverter {
   async convertToMp3() {
     try {
       return await this.convertOgaToMp3();
-    } catch (err) {
-      console.error("FileConverter.convertToMp3", err);
+    } catch (error) {
+      console.error("FileConverter.convertToMp3", { error });
     }
   }
 

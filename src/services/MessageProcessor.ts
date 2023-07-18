@@ -5,16 +5,24 @@ export class MessageProcessor extends ContentProcessor {
   async start() {
     try {
       await this.startUseService();
-    } catch (err) {
-      console.error("MessageProcessor.start", { err });
+    } catch (error) {
+      console.error("MessageProcessor.start", { error });
     }
   }
 
   async updateTopic(topic: string) {
     try {
       await this.updateConversationTopic(topic);
-    } catch (err) {
-      console.error("UserMessageProcessor.updateTopic", { err });
+    } catch (error) {
+      console.error("UserMessageProcessor.updateTopic", { error });
+    }
+  }
+
+  async getTextOfVoice() {
+    try {
+      return await this.getLastMessage();
+    } catch (error) {
+      console.error("UserMessageProcessor.getTextOfVoice", { error });
     }
   }
 
@@ -29,5 +37,10 @@ export class MessageProcessor extends ContentProcessor {
       throw new Error("Could not select a topic. Please choose another one.");
     }
     await this.dataManager.chooseTopic(topic);
+  }
+
+  private async getLastMessage() {
+    const messages = await this.dataManager.getMessages(1);
+    return messages.at(0);
   }
 }

@@ -1,12 +1,10 @@
 require("module-alias/register");
 
-import { config } from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import { startBot } from "@api/telegram";
 
 const app = express();
-config();
 
 app.use(express.static("public"));
 app.use(express.json());

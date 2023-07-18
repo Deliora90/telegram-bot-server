@@ -21,8 +21,8 @@
       "@services/*": [
         "src/services/*"
       ],
-      "@generalTypes/*": [
-        "src/generalTypes/*"
+      "@globalTypes/*": [
+        "src/globalTypes/*"
       ],
       "@constants": [
         "src/constants.ts"

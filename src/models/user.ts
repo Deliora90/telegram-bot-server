@@ -1,7 +1,7 @@
 import { Schema, model, Types, Document, Model } from "mongoose";
 import { TopicsType } from "@constants";
 import { ChatCompletionResponseMessageRoleEnum } from "openai";
-import { Message, User } from "@generalTypes/content";
+import { Message, User } from "@globalTypes/content";
 
 export interface UserDocument extends User, Document {
   setTopic: (topic: TopicsType) => Promise<void>;
@@ -31,7 +31,7 @@ UserSchema.methods.setTopic = async function setTopic(topic: TopicsType) {
   await this.save();
 };
 UserSchema.methods.setMessage = async function setMessage(message: Message) {
-  this.messages.push(message); //TODO: ХЗ
+  this.messages.push(message);
   await this.save();
 };
 UserSchema.methods.getMessage = async function getMessage(index: number) {

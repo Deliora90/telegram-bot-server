@@ -7,8 +7,8 @@ export const createMp3File = async (inputPath: string) => {
       outputPath = inputPath.replace(".oga", ".mp3");
       await convertOggToMp3(inputPath, outputPath);
     }
-  } catch (err) {
-    console.error("error", { err });
+  } catch (error) {
+    console.error("error", { error });
   }
   return outputPath;
 };

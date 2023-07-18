@@ -1,5 +1,5 @@
 import { ChatCompletionRequestMessage } from "openai";
-import { Message } from "@generalTypes/content";
+import { Message } from "@globalTypes/content";
 import { PROMPT_MESSAGE } from "@constants";
 
 export const prepareMessages = (

@@ -1,11 +1,5 @@
-import {
-  ChatCompletionRequestMessage,
-  CreateChatCompletionResponse,
-} from "openai";
-import { config } from "dotenv";
+import { ChatCompletionRequestMessage } from "openai";
 import { BotCommand, SendMessageOptions } from "node-telegram-bot-api";
-
-config();
 
 export const GPT_MODEL = "gpt-3.5-turbo";
 export const SPEECH_TO_TEXT_MODEL = "whisper-1";
@@ -15,17 +9,18 @@ export const PROMPT_MESSAGE: ChatCompletionRequestMessage = {
   role: "assistant",
   content: process.env.TALKS_PROMPT,
 };
+export const TOPIC_MESSAGE = process.env.TOPIC_PROMPT;
 export const TEXT_TO_SPEECH_TOKEN = process.env.TTSMARKER_TOKEN;
 
+export const TEXT_TO_SPEECH_URL =
+  "https://api.ttsmaker.com/v1/create-tts-order";
+
 export const commands: BotCommand[] = [
-  { command: "/start", description: "bot started" },
-  { command: "/topics", description: "bot started" },
-  { command: "/info", description: "get info" },
-  { command: "/talks", description: "commend talks" },
-  { command: "/voice", description: "commend talks" },
+  { command: "/start", description: "Launching the bot" },
+  { command: "/topics", description: "Choosing a topic for conversation." },
+  { command: "/info", description: "Information about the bot." },
 ];
 
-//TODO: Сделать другие типы для тем
 export const Topics = {
   SERIES: "series",
   JOB: "job",
@@ -48,24 +43,12 @@ export const topicOptions: SendMessageOptions = {
   },
 };
 
-export const gptResponse: CreateChatCompletionResponse = {
-  id: "chatcmpl-123",
-  object: "chat.completion",
-  model: GPT_MODEL,
-  created: 1677652288,
-  choices: [
-    {
-      index: 0,
-      message: {
-        role: "assistant",
-        content: "\n\nHello there, how may I assist you today?",
-      },
-      finish_reason: "stop",
-    },
-  ],
-  usage: {
-    prompt_tokens: 9,
-    completion_tokens: 12,
-    total_tokens: 21,
+export const usersActions: SendMessageOptions = {
+  reply_markup: {
+    keyboard: [[{ text: "Text the same in English" }]],
   },
+};
+
+export const removeKeyboard: SendMessageOptions = {
+  reply_markup: { remove_keyboard: true },
 };
