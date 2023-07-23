@@ -4,6 +4,7 @@
   "main": "index.ts",
   "scripts": {
     "build": "tsc",
+    "start": "npm run build && node -r dotenv/config ./dist/index.js",
     "dev": "nodemon -r dotenv/config src/index.ts"
   },
   "keywords": [
@@ -15,13 +16,13 @@
   "license": "ISC",
   "description": "Telegram bot for practicing English",
   "_moduleAliases": {
-    "@api": "src/api/",
-    "@helpers": "src/helpers/",
-    "@models": "src/models/",
-    "@services": "src/services/",
-    "@globalTypes": "src/globalTypes/",
-    "@constants": "src/constants.ts",
-    "@configs": "src/configs.ts"
+    "@api": "dist/api/",
+    "@helpers": "dist/helpers/",
+    "@models": "dist/models/",
+    "@services": "dist/services/",
+    "@globalTypes": "dist/globalTypes/",
+    "@constants": "dist/constants.js",
+    "@configs": "dist/configs.js"
   },
   "_moduleDirectories": [
     "node_modules_custom"

@@ -1,5 +1,4 @@
-require("module-alias/register");
-
+import "module-alias/register";
 import express from "express";
 import mongoose from "mongoose";
 import { startBot } from "@api/telegram";

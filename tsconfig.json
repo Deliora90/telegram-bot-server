@@ -7,28 +7,28 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
       "@api/*": [
-        "src/api/*"
+        "api/*"
       ],
       "@helpers/*": [
-        "src/helpers/*"
+        "helpers/*"
       ],
       "@models/*": [
-        "src/models/*"
+        "models/*"
       ],
       "@services/*": [
-        "src/services/*"
+        "services/*"
       ],
       "@globalTypes/*": [
-        "src/globalTypes/*"
+        "globalTypes/*"
       ],
       "@constants": [
-        "src/constants.ts"
+        "constants.ts"
       ],
       "@configs": [
-        "src/configs.ts"
+        "configs.ts"
       ],
     }
   },
